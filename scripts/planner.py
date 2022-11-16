@@ -1,7 +1,10 @@
 import csv
+import tkinter
+from tkinter.filedialog import askopenfilename
 from collections import namedtuple
 
 Task = namedtuple("Task", ["title", "duration", "prerequisites"])
+
 def read_tasks(filename):
     tasks = {}
     for row in csv.reader(open(filename)):
@@ -29,3 +32,12 @@ def order_tasks(tasks):
                 completed.add(task_number)
                 break
     return start_days
+root = tkinter.Tk()
+root.title("Project Planner")
+open_button = tkinter.Button(root, text="Open project...", \
+                             command=open_project)
+open_button.pack(side="top")
+canvas = tkinter.Canvas(root, width=800, \
+                        height=400, bg="white")
+canvas.pack(side="bottom")
+tkinter.mainloop()
