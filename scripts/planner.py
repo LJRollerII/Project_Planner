@@ -67,11 +67,20 @@ def open_project():
                                filetypes=[("CSV Document", "*.csv")])
     tasks = read_tasks(filename)
     draw_chart(tasks, canvas)
+    filename_label.config(text=filename)
+def clear_canvas():
+    filename_label.config(text="")
+    canvas.delete(tkinter.ALL)
 root = tkinter.Tk()
 root.title("Project Planner")
+root.resizable(width=False, height=False)
+button_frame = tkinter.Frame(root, padx=5, pady=5)
+button_frame.pack(side="top", fill="x")
 open_button = tkinter.Button(root, text="Open project...", \
                              command=open_project)
-open_button.pack(side="top")
+open_button.pack(side="left")
+filename_label = tkinter.Label(button_frame)
+filename_label.pack(side="right")
 canvas = tkinter.Canvas(root, width=800, \
                         height=400, bg="white")
 canvas.pack(side="bottom")
